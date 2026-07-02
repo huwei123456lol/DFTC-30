@@ -1,0 +1,50 @@
+<script type="text/javascript">
+    /*
+    * 请在下面编写JS代码
+    */
+
+    jQuery(document).ready(function(){
+        ModeForm.bindDetailFieldChangeEvent("field22012",
+            function(id,rowIndex,value){
+                console.log("ModeForm.bindDetailFieldChangeEvent--",id,rowIndex,value);
+                var costablename  = ModeForm.getFieldValue('field22009_' + rowIndex);
+                changeDt2tbName(costablename,value)
+
+            });
+
+
+        window.changeDt2tbName = function(costablename,ystablename){
+            var dt2Arr = ModeForm.getDetailAllRowIndexStr("detail_2").split(',')
+            dt2Arr.forEach(function(index){
+
+                var dt2costable = ModeForm.getFieldValue('field22019_' + index);
+                if(dt2costable == costablename){
+                    ModeForm.changeFieldValue("field22023_"+index, {
+                        value: ystablename
+                    });
+                }
+
+            })
+        }
+
+        jQuery('#tbzb').live('click',function(){
+
+            console.log('costablename ');
+            var costablename  = ModeForm.getFieldValue('field22009_0');
+            console.log('costablename === ',costablename)
+            changeDt2tbName(costablename,' ')
+            changeDt2tbName(costablename,'')
+
+        })
+    });
+
+
+
+</script>
+
+<style type="text/css">
+    /*
+    * 请在下方编辑CSS
+    */
+
+</style>
