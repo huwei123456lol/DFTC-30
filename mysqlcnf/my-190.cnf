@@ -1,0 +1,153 @@
+my-137.cnf[client]
+port=3306
+socket=/db/mysql/3306/mysql.sock
+user=root
+password='utf8mb4'
+
+[mysql]
+prompt="db190>"
+port=3306
+socket=/db/mysql/3306/mysql.sock
+no-auto-rehash
+###########change#####################################################
+
+
+[mysqld]
+port=3306
+socket=/db/mysql/3306/mysql.sock
+#mysqlx_socket=/db/mysql/3306/mysqlx.sock
+#lc-messages-dir=/usr/share/mysql/english
+pid_file=/db/mysql/3306/mysqld.pid
+user		=mysql
+sql_mode = 'STRICT_TRANS_TABLES,NO_AUTO_VALUE_ON_ZERO,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'
+###########change#####################################################
+server-id = 190                                  # IP后两位
+log-bin=/db/mysql/3306/log/binlog/bin
+max_connections=2000
+max_user_connections=2000
+innodb_buffer_pool_size=18G
+innodb_buffer_pool_instances=1
+innodb_read_io_threads = 1
+innodb_write_io_threads = 1
+innodb_purge_threads = 1
+innodb_io_capacity = 1000
+max_execution_time=600000
+report_host='10.127.22.190'
+report_port=3306
+
+#validate_password.policy=0
+#validate_password.length=1
+
+default-time_zone='+8:00'
+character-set-server=utf8
+basedir         =/usr/
+plugin_dir=/usr/lib64/mysql/plugin/
+datadir         =/db/mysql/3306/data
+tmpdir          =/db/mysql/3306/tmp
+skip-external-locking
+skip-name-resolve
+       skip-ssl
+###skip-networking
+###event_scheduler=ON
+sql_mode = ''
+default_authentication_plugin=mysql_native_password
+default-storage-engine = INNODB
+wait_timeout  =  3600
+connect_timeout  =  20
+interactive_timeout  =  3600
+back_log  =500
+open_files_limit =50000
+lower_case_table_names=1
+####### GTID #########################################################################
+gtid_mode=on
+enforce_gtid_consistency=on
+###### binlog ########################################################################
+log_bin_index=/db/mysql/3306/log/binlog/binlog.index
+binlog_rows_query_log_events=on
+binlog_row_image=full                        
+#binlog_row_metadata=full
+binlog_format=ROW
+binlog_checksum=NONE
+sync_binlog=1
+log_slave_updates=1
+master_info_repository=TABLE
+max_binlog_size  =128M
+expire-logs-days=7           
+#expire-logs-days=7  binlog_expire_logs_seconds=604800
+#####relaylog######GTID salf###################################################################
+relay-log=relay-bin
+relay_log_index=/db/mysql/3306/log/relaylog/relay.index
+relay_log_info_repository=TABLE
+#####relaylog######file+row salf###################################################################
+relay_log_recovery=1
+sync_relay_log=1
+#########slow log#####################################################################
+slow_query_log  =1                               #开启慢日志
+slow_query_log_file=/db/mysql/3306/log/slowlog/slow.log
+#log-slow-verbosity =query_plan,explain
+long_query_time  =2
+#########error log#############
+log-error   =  /db/mysql/3306/log/errorlog/error.log
+log_timestamps = system
+#######per_thread_buffers############
+max_connect_errors=100000000
+max_allowed_packet = 512M
+table_open_cache = 10000
+table_definition_cache = 10000
+thread_cache_size = 450
+tmp_table_size = 64M
+max_heap_table_size = 64M
+bulk_insert_buffer_size = 32M
+
+
+##MyISAM## 
+key_buffer_size = 64M
+myisam_sort_buffer_size = 8M
+concurrent_insert=2
+low_priority_updates=1
+myisam_recover_options=BACKUP,FORCE
+######### InnoDB #############
+innodb_sort_buffer_size = 64M
+innodb_rollback_on_timeout=1
+innodb_data_file_path = ibdata1:10M:autoextend
+innodb_buffer_pool_dump_at_shutdown=1
+innodb_buffer_pool_load_at_startup =1
+######### InnoDB ###redo ##########
+innodb_log_file_size = 512M
+innodb_log_files_in_group = 4
+innodb_flush_log_at_trx_commit = 1
+innodb_lock_wait_timeout =10
+innodb_sync_spin_loops = 40
+innodb_max_dirty_pages_pct = 95
+innodb_thread_concurrency = 0
+innodb_thread_sleep_delay = 500
+innodb_concurrency_tickets = 1000
+log_bin_trust_function_creators = 1
+innodb_flush_method = O_DIRECT
+innodb_file_per_table = 1
+innodb_purge_batch_size = 32
+innodb_old_blocks_time = 1000
+innodb_change_buffering = all
+transaction_isolation=READ-COMMITTED
+innodb_stats_on_metadata=off
+super_read_only=0
+read_only=0
+
+#### session 参数############################
+read_buffer_size = 256K
+read_rnd_buffer_size = 256K
+sort_buffer_size = 256K
+join_buffer_size = 256K
+binlog_cache_size=32K
+thread_stack = 256K
+group_concat_max_len = 100000
+max_sp_recursion_depth=100
+
+[mysqldump]
+quick
+max_allowed_packet = 1024M
+[mysqlhotcopy]
+interactive-timeout
+[mysqld_safe]
+open-files-limit = 65535
+

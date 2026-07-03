@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<select multiple="multiple" size="8" id="left_box">
+    <option>水果</option>
+    <option>橘子</option>
+    <option>苹果</option>
+    <option>香蕉</option>
+    <option>梨子</option>
+    <option>凤梨</option>
+    <option>桃子</option>
+    <option>樱桃</option>
+</select>
+
+<select multiple="multiple" size="8" id="right_box">
+    <option>购物车</option>
+</select>
+
+<input id="to_right" onclick="to_right()" value="添加" type="button">
+<input id="to_left" onclick="to_left()" value="取消" type="button">
+<script>
+    var box_r=document.getElementById("right_box");  // 找到右边盒子对象
+    var box_l=document.getElementById("left_box");   // 找到左边盒子对象
+    var options=box_l.getElementsByTagName("option"); //找到左盒子下的所有option数组  （1）
+    function to_right() {                            // 移动到右边盒子方法
+
+        for (var i=0;i<options.length;i++){
+            var op=options[i];
+            if(op.selected==true){                           //option有个属性，如果选中就自动加入了selected属性 所以通过这个逻辑来找出选中的option
+                box_r.appendChild(op);                       //appendChild方法不光是创建元素,还可以移动元素
+                i--;
+            }
+        }
+    }
+    function to_left() {                                   //移动到左边盒子的方法
+        var options=document.getElementById("right_box").getElementsByTagName("option"); //（2）
+        for (i in options){
+            var op=options[i];
+            if(op.selected==true){
+                box_l.appendChild(op);
+            }
+        }
+    }
+
+    const dt1Count = jQuery('#devDtinDtTb_' + 1).children().filter('[name="dt4Data"]');
+    for(s = 0; s < dt1Count.length; s++){
+        jQuery('#oTable3').children()[0].append(dt1Count[s])
+    }
+</script>
+</body>
+</html>
